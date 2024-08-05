@@ -1,3 +1,4 @@
+import logging
 from pyyoutube import Api
 from .config import Config
 
@@ -15,5 +16,6 @@ def get_latest_video():
             return f"https://www.youtube.com/watch?v={video_id}"
                     
         return None
-    except Exception:
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
         return None
