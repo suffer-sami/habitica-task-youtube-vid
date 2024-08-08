@@ -3,11 +3,13 @@ from flask import Blueprint, request, jsonify
 from werkzeug.exceptions import BadRequest
 from .youtube import get_latest_video
 from .whatsapp import send_whatsapp_message
+from .config import Config
+
 
 webhook_bp = Blueprint('webhook', __name__)
 
-def process_goto_walk_task():
-    """Process the 'Goto Walk' task completion."""
+def process_task_completion():
+    """Process the task completion."""
     latest_video = get_latest_video()
     logging.info(latest_video)
     if latest_video:
@@ -31,8 +33,8 @@ def webhook():
 
         logging.info(f"Received webhook - Event: {event_type}, Webhook: {webhook_type}, Task: {task_type}, Name: {task_name}, Direction: {direction}")
 
-        if webhook_type == 'taskActivity' and event_type == 'scored' and task_type == 'daily' and direction == 'up' and task_name == "Goto Walk":
-            return jsonify(process_goto_walk_task()), 200
+        if webhook_type == 'taskActivity' and event_type == 'scored' and task_type == 'daily' and direction == 'up' and task_name == Config.TASK_TO_BE_COMPLETED:
+            return jsonify(process_task_completion()), 200
 
         logging.info("No action required for this webhook")
         return jsonify({"success": True, "message": "No action required"}), 200
