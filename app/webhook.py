@@ -12,7 +12,7 @@ def process_task_completion():
     """Process the task completion."""
     latest_video = get_latest_video()
     logging.info(latest_video)
-    if latest_video:
+    if latest_video and Config.SEND_WHATSAPP_MESSAGES:
         message_id = send_whatsapp_message(f"🎁: {latest_video}")
         logging.info(f"Message Sent (ID: {message_id})")
     return {"success": True, "message": "Task completion processed"}
