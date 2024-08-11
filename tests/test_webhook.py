@@ -46,12 +46,12 @@ def test_webhook_process_task(client, mocker):
 def test_webhook_invalid_data(client):
     response = client.post('/webhook', data=None, content_type='application/json')
     assert response.status_code == 400
-    assert response.json['success'] == False
+    assert response.json['success'] is False
 
 def test_webhook_missing_data(client):
     response = client.post('/webhook', json={})
     assert response.status_code == 400
-    assert response.json["success"] == False
+    assert response.json["success"] is False
 
 def test_process_task_completion(mocker):
     mock_get_video = mocker.patch('app.webhook.get_latest_video')

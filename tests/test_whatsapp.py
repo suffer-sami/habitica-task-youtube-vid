@@ -28,5 +28,5 @@ def test_send_whatsapp_message_exception(mocker):
 
     mock_client.return_value.messages.create.side_effect = Exception("Twilio error")
     result = send_whatsapp_message("Test message")
-    assert result == None
+    assert result is None
     mock_client.return_value.messages.create.assert_called_once()

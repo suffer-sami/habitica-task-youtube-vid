@@ -1,4 +1,3 @@
-import pytest
 from app.youtube import get_latest_video
 
 def test_get_latest_video_success(mocker):
@@ -53,7 +52,7 @@ def test_get_latest_video_no_uploads(mocker):
     assert video_url is None
 
 def test_get_latest_video_api_exception(mocker):
-    mock_api = mocker.patch('app.youtube.Api', side_effect=Exception("API failure"))
+    mocker.patch('app.youtube.Api', side_effect=Exception("API failure"))
 
     video_url = get_latest_video()
     assert video_url is None
