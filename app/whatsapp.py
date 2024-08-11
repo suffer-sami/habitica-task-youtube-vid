@@ -17,4 +17,4 @@ def send_whatsapp_message(msg):
         return message.sid
     except Exception as e:
         logging.error(f"An error occurred: {e}")
-        return 0
+        return None
