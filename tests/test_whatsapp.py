@@ -1,5 +1,6 @@
 from app.whatsapp import send_whatsapp_message
 
+
 def test_send_whatsapp_message_enabled(mocker):
     mock_client = mocker.patch('app.whatsapp.Client', autospec=True)
     mock_config = mocker.patch('app.whatsapp.Config')
@@ -12,6 +13,7 @@ def test_send_whatsapp_message_enabled(mocker):
     result = send_whatsapp_message("Test message")
     assert result == 1
 
+
 def test_send_whatsapp_message_disabled(mocker):
     mock_client = mocker.patch('app.whatsapp.Client', autospec=True)
     mock_config = mocker.patch('app.whatsapp.Config')
@@ -21,12 +23,14 @@ def test_send_whatsapp_message_disabled(mocker):
     assert result == 0
     mock_client.messages.create.assert_not_called()
 
+
 def test_send_whatsapp_message_exception(mocker):
     mock_client = mocker.patch('app.whatsapp.Client', autospec=True)
     mock_config = mocker.patch('app.whatsapp.Config')
     mock_config.SEND_WHATSAPP_MESSAGES = True
 
-    mock_client.return_value.messages.create.side_effect = Exception("Twilio error")
+    mock_client.return_value.messages.create.side_effect = Exception(
+        "Twilio error")
     result = send_whatsapp_message("Test message")
-    assert result == None
+    assert result is None
     mock_client.return_value.messages.create.assert_called_once()

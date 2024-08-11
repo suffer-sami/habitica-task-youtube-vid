@@ -1,3 +1,4 @@
+import json
 import logging
 from flask import Blueprint, request, jsonify
 from werkzeug.exceptions import BadRequest
@@ -8,6 +9,7 @@ from .config import Config
 
 webhook_bp = Blueprint('webhook', __name__)
 
+
 def process_task_completion():
     """Process the task completion."""
     latest_video = get_latest_video()
@@ -16,6 +18,7 @@ def process_task_completion():
         message_id = send_whatsapp_message(f"🎁: {latest_video}")
         logging.info(f"Message Sent (ID: {message_id})")
     return {"success": True, "message": "Task completion processed"}
+
 
 @webhook_bp.route('/webhook', methods=['POST'])
 def webhook():
@@ -31,9 +34,22 @@ def webhook():
         task_name = task.get('text')
         direction = data.get('direction')
 
-        logging.info(f"Received webhook - Event: {event_type}, Webhook: {webhook_type}, Task: {task_type}, Name: {task_name}, Direction: {direction}")
+        log_data = {
+            "event_type": event_type,
+            "webhook_type": webhook_type,
+            "task_type": task_type,
+            "task_name": task_name,
+            "direction": direction
+        }
+        logging.info("Received webhook: %s", json.dumps(log_data, indent=4))
 
-        if webhook_type == 'taskActivity' and event_type == 'scored' and task_type == 'daily' and direction == 'up' and task_name == Config.TASK_TO_BE_COMPLETED:
+        if (
+            webhook_type == 'taskActivity' and
+            event_type == 'scored' and
+            task_type == 'daily' and
+            direction == 'up' and
+            task_name == Config.TASK_TO_BE_COMPLETED
+        ):
             return jsonify(process_task_completion()), 200
 
         logging.info("No action required for this webhook")
@@ -44,4 +60,7 @@ def webhook():
         return jsonify({"success": False, "message": str(e)}), 400
     except Exception as e:
         logging.error(f"Error processing webhook: {str(e)}", exc_info=True)
-        return jsonify({"success": False, "message": "Internal server error"}), 500
+        return jsonify({
+            "success": False,
+            "message": "Internal server error"
+        }), 500
