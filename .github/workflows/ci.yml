@@ -50,5 +50,5 @@ jobs:
             
             - name: Lint with Ruff
               run: ruff check
-              continue-on-error: true
+              continue-on-error: false
             
