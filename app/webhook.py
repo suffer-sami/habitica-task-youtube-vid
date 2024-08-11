@@ -60,4 +60,7 @@ def webhook():
         return jsonify({"success": False, "message": str(e)}), 400
     except Exception as e:
         logging.error(f"Error processing webhook: {str(e)}", exc_info=True)
-        return jsonify({"success": False, "message": "Internal server error"}), 500
+        return jsonify({
+            "success": False,
+            "message": "Internal server error"
+        }), 500
