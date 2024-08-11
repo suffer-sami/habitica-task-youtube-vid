@@ -2,6 +2,7 @@ import logging
 from twilio.rest import Client
 from .config import Config
 
+
 def send_whatsapp_message(msg):
     if not Config.SEND_WHATSAPP_MESSAGES:
         # Return early if sending messages is disabled in the config

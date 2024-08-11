@@ -42,13 +42,6 @@ jobs:
                   python-version: '3.11'
                   cache: 'pip'
                   
-            - name: Install dependiences
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install -r requirements.txt
-                  pip install ruff
-            
-            - name: Lint with Ruff
-              run: ruff check
-              continue-on-error: false
+            - name: flake8 Lint
+              uses: py-actions/flake8@v2
             
