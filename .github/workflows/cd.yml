@@ -50,5 +50,7 @@ jobs:
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             docker stop flask-app || true
             docker rm flask-app || true
-            docker run -d --name flask-app -p 80:5000 --env-file ~/.env $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker run -d --name flask-app -p 80:5000 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker cp ~/.env flask-app:/app/.env
+            docker restart flask-app
           "
