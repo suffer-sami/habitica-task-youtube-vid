@@ -45,15 +45,15 @@ When you complete the specified Habitica task, the script will send you a YouTub
     pip install -r requirements.txt
     ```
 5. Set up the environment variables:
-- Copy the `.env.example` file to create a `.env` file.
-- Modify the `.env` file with your specific settings.
+    - Copy the `.env.example` file to create a `.env` file.
+    - Modify the `.env` file with your specific settings.
 
 6. **Install ngrok:**
-- Download and install ngrok from [ngrok's website](https://ngrok.com/).
-- Connect your ngrok account by running the following command with your auth token:
-  ```
-  ngrok authtoken your_auth_token
-  ```  
+    - Download and install ngrok from [ngrok's website](https://ngrok.com/).
+    - Connect your ngrok account by running the following command with your auth token:
+      ```
+      ngrok authtoken your_auth_token
+      ```  
 ### Running the application
 To run the application locally:
 ```bash
@@ -75,8 +75,21 @@ docker build -t habitica-task-youtube-vid .
 docker run -p 5000:5000 habitica-task-youtube-vid
 ```
 
+### Testing
+1. **Install the testing tools:**
+    ```bash
+    pip install pytest pytest-cov pytest-mock
+    ```
+2. **Run the tests with coverage:**
+    ```bash
+    pytest --cov=app tests/
+    ```
+
 ## Workflow
 <p align="center">
   <img src="./assets/workflow.png">
 </p>
 
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request. If you need any help setting up automation, you can contact me.
