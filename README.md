@@ -1,4 +1,6 @@
 # habitica-task-youtube-vid
+> [!IMPORTANT]
+> [Habitica](https://habitica.com) is a productivity app that gamifies your tasks and habits. By turning your daily goals into a game, Habitica helps you stay motivated and productive. You can earn rewards and level up by completing tasks and building good habits.
 
 > [!NOTE]  
 > ***Why Develop This?***  - I’m into a YouTube channel that posts daily, but I’ve set up a system that keeps me off my computer from 10 p.m. to 6 a.m.  Since I can't access my computer during these hours, I developed a way to automatically send myself the video on WhatsApp as a reward for completing the task on Habitica like going for a walk.
