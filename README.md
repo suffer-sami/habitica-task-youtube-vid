@@ -1,7 +1,7 @@
 # habitica-task-youtube-vid
 
 > [!NOTE]  
-> ***Why Develop This?***  - I’m into a YouTube channel that posts daily, but I’ve set up a system that keeps me off my computer from 10 p.m. to 6 a.m. So, I developed a way to automatically send myself the video on WhatsApp as a reward for things like going for a walk.
+> ***Why Develop This?***  - I’m into a YouTube channel that posts daily, but I’ve set up a system that keeps me off my computer from 10 p.m. to 6 a.m.  Since I can't access my computer during these hours, I developed a way to automatically send myself the video on WhatsApp as a reward for completing the task on Habitica like going for a walk.
 >  
 > Why WhatsApp, you might ask? The reason is that I already use WhatsApp for almost everything. Plus, it has this cool feature that lets you watch YouTube videos as a preview without needing a browser on your phone—which, if you haven’t guessed, I don’t have.
 > <details>
@@ -89,6 +89,14 @@ docker run -p 5000:5000 habitica-task-youtube-vid
 <p align="center">
   <img src="./assets/workflow.png">
 </p>
+
+## Potential Improvements:
+
+1. **Reduce Retrieval Delay**: Currently, there is a slight delay in retrieving the video. To address this, I could implement a caching layer to store recently accessed videos and speed up the delivery process.
+
+2. **Optimize WhatsApp API Usage**: The WhatsApp API has a limitation requiring the session to be refreshed every 24 hours. To maintain seamless functionality, I plan to automate the session refresh process, ensuring it remains active continuously.
+
+3. **Implement Preemptive Threading**: If I complete a task before the YouTube video is uploaded, the system should initiate a thread that waits for the new video to be available. Once uploaded, this thread will automatically send me the video link.
 
 ## Contributing
 
